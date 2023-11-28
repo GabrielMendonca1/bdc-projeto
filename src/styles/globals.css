@@ -8,13 +8,6 @@
   --background-end-rgb: 255, 255, 255;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
-}
 
 body {
   color: rgb(var(--foreground-rgb));
@@ -25,3 +18,48 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
+
+.chatbot-container {
+  max-width: 500px;
+  margin: auto;
+  border: 1px solid #ddd;
+  padding: 20px;
+}
+
+.messages-container {
+  height: 300px;
+  overflow-y: auto;
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 20px;
+}
+
+.message {
+  padding: 10px;
+  margin: 5px 0;
+  border-radius: 10px;
+}
+
+.message.user {
+  background-color: #d1e7dd;
+  text-align: left;
+}
+
+.message.gpt {
+  background-color: #cef2f3;
+  text-align: right;
+}
+
+.input-container {
+  display: flex;
+}
+
+.input-container input {
+  flex-grow: 1;
+  padding: 10px;
+  margin-right: 10px;
+}
+
+.input-container button {
+  padding: 10px;
+}
+
