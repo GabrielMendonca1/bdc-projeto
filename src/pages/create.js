@@ -5,14 +5,11 @@ export default function CreatePage() {
   const [inputData, setInputData] = useState({ tableName: '' });
   const [tableFields, setTableFields] = useState([]);
 
-  // Atualiza os campos do inputData com base na entrada do usuário
   const updateInputData = (field, value) => {
     setInputData({ ...inputData, [field]: value });
   };
 
-  // Função para buscar a estrutura da tabela após a seleção
   const fetchTableStructure = async (tableName) => {
-    // Substitua por uma chamada à API real para obter os campos da tabela
     if (tableName === 'teste1') {
       setTableFields(['name', 'description', 'category']);
     } else if (tableName === 'teste2') {
@@ -27,7 +24,6 @@ export default function CreatePage() {
     fetchTableStructure(inputData.tableName);
   }, [inputData.tableName]);
 
-  // Função para criar um novo item
   const handleCreate = async () => {
     if (!inputData.tableName) {
       alert('Por favor, selecione uma tabela.');
@@ -107,7 +103,7 @@ export default function CreatePage() {
 
           <button 
             onClick={handleCreate}
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
           >
             Criar Item
           </button>

@@ -5,16 +5,16 @@ export default function ReadPage() {
   const [items, setItems] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [selectedTable, setSelectedTable] = useState('');
-  const [showSelectTableMessage, setShowSelectTableMessage] = useState(false); // Novo estado
+  const [showSelectTableMessage, setShowSelectTableMessage] = useState(false); 
 
   const fetchItems = async () => {
     if (!selectedTable) {
-      setShowSelectTableMessage(true); // Mostrar mensagem
+      setShowSelectTableMessage(true); 
       setIsLoading(false);
       return;
     }
 
-    setShowSelectTableMessage(false); // Esconder mensagem
+    setShowSelectTableMessage(false); 
     try {
       setIsLoading(true);
       const response = await fetch(`/api/read?tableName=${selectedTable}`);
@@ -34,29 +34,31 @@ export default function ReadPage() {
     fetchItems();
   }, [selectedTable]);
 
-  const renderItemProperties = (item) => {
-    return Object.entries(item).map(([key, value]) => (
-      <p key={key} className="text-sm">
-        <strong>{key}:</strong> {value}
-      </p>
-    ));
-  };
+  const renderItemProperties = (item) => (
+    <div className="flex flex-col gap-1">
+      {Object.entries(item).map(([key, value]) => (
+        <p key={key} className="text-sm">
+          <strong>{key}:</strong> {value}
+        </p>
+      ))}
+    </div>
+  );
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col bg-gray-50">
       <Header />
       <main className="flex-grow p-8">
-        <div className="max-w-2xl mx-auto">
-          <h2 className="text-2xl font-bold mb-6">Lista de Itens</h2>
+        <div className="max-w-4xl mx-auto bg-white shadow-lg rounded-lg p-6">
+          <h2 className="text-3xl font-bold mb-4">Lista de Itens</h2>
 
           {showSelectTableMessage && (
-            <p className="text-red-500 mb-2">Por favor, selecione uma tabela</p>
+            <p className="text-red-600 mb-3">Por favor, selecione uma tabela</p>
           )}
 
           <select
             value={selectedTable}
             onChange={(e) => setSelectedTable(e.target.value)}
-            className="mb-4 p-2 border-2 border-gray-300"
+            className="mb-5 p-2 border border-gray-400 rounded-md w-full"
           >
             <option value="">Selecione uma tabela</option>
             <option value="teste1">T1</option>
@@ -64,15 +66,15 @@ export default function ReadPage() {
           </select>
 
           {isLoading ? (
-            <p>Carregando itens...</p>
+            <p className="text-lg text-center text-gray-500">Carregando itens...</p>
           ) : (
-            <ul className="space-y-4">
+            <div className="space-y-3">
               {items.map((item, index) => (
-                <li key={index} className="bg-gray-100 p-4 rounded-md">
+                <div key={index} className="bg-gray-100 p-4 rounded-md shadow-sm">
                   {renderItemProperties(item)}
-                </li>
+                </div>
               ))}
-            </ul>
+            </div>
           )}
         </div>
       </main>
